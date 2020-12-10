@@ -21,21 +21,28 @@
       #header-wrap .menu-wrap {width: 800px; height: 100px; float:right; text-align: center;}
       #header-wrap .menu {float:left; height:100%; line-height: 30px;}
       #header-wrap li {width: 200px; float: left; margin: auto; transition: all 0.4s;}
-      #header-wrap li a {height:100%;}
+      #header-wrap li a {height:100px; line-height: 100px;}
       #header-wrap li a:hover {background-color: indianRed;color:#fff;}
+
+      #main {width: 1200px; position: relative; margin:0 auto; z-index: 1; background:rgba(255,255,255, 0.2);}
+      #main .submenu {display: none; position: absolute; right:0;  background: rgba(255, 255, 255, 0.5)}
+      #main .submenu ul {width: 200px; float: left; text-align: center;}
+      #main .submenu li a {width: 200px; height: 40px; line-height: 40px; transition: all 0.4s;}
+      #main .submenu li a:hover {background-color: indianRed;color:#fff;}
 
       /* 컨텐츠 */
       #container {width: 1200px; height: 500px; margin: 0 auto; background: blue;}
       
-      #container #main-image {height: 350px; overflow: hidden;}
+      #container #slide {height: 300px; overflow: hidden;}
       #container #slide .image-group {position: relative; width: 2850px; left: -960px;}
       #container #slide .image-group > div {width: 960px; float: left;}
 
 
+      #container #contents {width: 100%; height:200px; }
+      #container #contents div {width: 33.3%; float: left; padding: 10px 0;}
+
       /* 푸터 */
       footer {width: 100%; height: 100px;}
-
-
 
     </style>
   </head>
@@ -44,7 +51,7 @@
     <div id="wrap">
 
       <!-- 헤더 -->
-      <header>
+      <header class="cf">
         <div id="header-wrap">
           <a class="logo" href="#" alt="로고">
             <img src="./images/Header/logo.png" alt="">
@@ -52,53 +59,60 @@
           <nav class="menu-wrap">
             <ul class="menu">
               <li><a href="#">해외여행</a></li>
-              <li><a href="#">해외여행</a></li>
-              <li><a href="#">해외여행</a></li>
-              <li><a href="#">해외여행</a></li>
+              <li><a href="#">국내여행</a></li>
+              <li><a href="#">제주도</a></li>
+              <li><a href="#">렌터카</a></li>
             </ul>
           </nav>
         </div>
       </header>
-
-      <nav class="submenu">
-
-        <ul>
-          <li><a href="#">동남아/대만</a></li>
-          <li><a href="#">중국/홍콩</a></li>
-          <li><a href="#">유럽/두바이</a></li>
-          <li><a href="#">미주/하와이</a></li>
-        </ul>
-        <ul>
-          <li><a href="#">서울/경기권</a></li>
-          <li><a href="#">충청권</a></li>
-          <li><a href="#">전라권</a></li>
-          <li><a href="#">경상/강원권</a></li>
-        </ul>
-        <ul>
-          <li><a href="#">버스여행</a></li>
-          <li><a href="#">자유여행</a></li>
-          <li><a href="#">호텔/펜션</a></li>
-        </ul>
-        <ul>
-          <li><a href="#">국내 렌터카</a></li>
-          <li><a href="#">국외 렌터카</a></li>
-        </ul>
-      </nav>
+      <div id="main" class="cf">
+        <nav class="submenu" >
+          <ul>
+            <li><a href="#">동남아/대만</a></li>
+            <li><a href="#">중국/홍콩</a></li>
+            <li><a href="#">유럽/두바이</a></li>
+            <li><a href="#">미주/하와이</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">서울/경기권</a></li>
+            <li><a href="#">충청권</a></li>
+            <li><a href="#">전라권</a></li>
+            <li><a href="#">경상/강원권</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">버스여행</a></li>
+            <li><a href="#">자유여행</a></li>
+            <li><a href="#">호텔/펜션</a></li>
+          </ul>
+          <ul>
+            <li><a href="#">국내 렌터카</a></li>
+            <li><a href="#">국외 렌터카</a></li>
+          </ul>
+        </nav>
+      </div>
 
       <!-- 슬라이드 -->
 
       <section id="container">
         <div id="slide">
           <div class="image-group">
-            <!-- <div class="slide-item1"><img src="./images/common/slide/images(1).jpg" alt=""></div>
-            <div class="slide-item2"><img src="./images/common/slide/images(2).jpg" alt=""></div>
-            <div class="slide-item3"><img src="./images/common/slide/images(3).jpg" alt=""></div> -->
+            <div class="slide-item1"><img src="./images/Slide/img1.jpg" alt=""></div>
+            <div class="slide-item2"><img src="./images/Slide/img2.jpg" alt=""></div>
+            <div class="slide-item3"><img src="./images/Slide/img3.jpg" alt=""></div>
           </div>
         </div>
 
         <div id="contents">
-
-
+            <div class="notice">
+              <h3>공지사항</h3>
+            </div>
+            <div class="gallery">
+              <h3>갤러리</h3>
+            </div>
+            <div class="direct">
+              <a href="#">바로가기</a>
+            </div>
         </div>
 
       </section>
@@ -124,14 +138,14 @@
         var max = 3;
         var width = 960;
 
-        $("#slide .container").prepend($("#slide .container .slide-item3"));
+        $("#slide .image-group").prepend($("#slide .image-group .slide-item3"));
 
         setInterval(function() {
-            $("#slide .container > div:nth-child(1)").animate({
+            $("#slide .image-group > div:nth-child(1)").animate({
               'margin-left' : (width * (-1)) + 'px'
-            }, 600, function() {
-              $("#slide .container").append($("#slide .container > div:nth-child(1)"));
-              $("#slide .container > div:nth-child(3)").css('margin-left', '0px');
+            }, 300, function() {
+              $("#slide .image-group").append($("#slide .image-group > div:nth-child(1)"));
+              $("#slide .image-group > div:nth-child(3)").css('margin-left', '0px');
             })
         }, 2000);
       });
