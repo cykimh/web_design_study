@@ -10,10 +10,12 @@
     <style>
       * {margin: 0; padding: 0; list-style: none;}
       a {text-decoration: none; display: block;}
+      nav li a:hover {color:#fff;}
+      button{cursor:pointer}
+      img {max-width:100%;}
 
       .cf::before, .cf::after {clear: both; content: ''; display: block;}
-      body {background: #ffffff; height: 700px;}
-
+      body {background: #ffffff;   color:#333333; height: 700px; }
       /* 헤더 */
       header {width: 100%; height: 100px; background:#00C73C;}
       #header-wrap {width: 1200px; height: 100px; margin: 0 auto;  }
@@ -22,28 +24,66 @@
       #header-wrap .menu {float:left; height:100%; line-height: 30px;}
       #header-wrap li {width: 200px; float: left; margin: auto; transition: all 0.4s;}
       #header-wrap li a {height:100px; line-height: 100px;}
-      #header-wrap li a:hover {background-color: indianRed;color:#fff;}
 
-      #main {width: 1200px; position: relative; margin:0 auto; z-index: 1; background:rgba(255,255,255, 0.2);}
-      #main .submenu {display: none; position: absolute; right:0;  background: rgba(255, 255, 255, 0.5)}
+      #main {width: 1200px; position: relative; margin:0 auto;}
+      #main .submenu {display: none; position: absolute; z-index: 1; right:0;  background: rgba(0, 0, 0, 0.5)}
       #main .submenu ul {width: 200px; float: left; text-align: center;}
       #main .submenu li a {width: 200px; height: 40px; line-height: 40px; transition: all 0.4s;}
-      #main .submenu li a:hover {background-color: indianRed;color:#fff;}
+      #main .submenu li a:hover {color:#fff;}
+			#main #submenu_wrap {display: none; position:absolute; z-index: 1; width: 400px; height: 160px; background: rgba(0, 0, 0, 0.5)}
 
       /* 컨텐츠 */
-      #container {width: 1200px; height: 500px; margin: 0 auto; background: blue;}
+      #container {width: 1200px; height: 500px; margin: 0 auto;}
       
-      #container #slide {height: 300px; overflow: hidden;}
-      #container #slide .image-group {position: relative; width: 2850px; left: -960px;}
-      #container #slide .image-group > div {width: 960px; float: left;}
+      #slide {height: 300px; overflow: hidden;}
+      #slide .image-group {position: relative; width: 2850px; left: -960px;}
+      #slide .image-group > div {width: 960px; float: left;}
 
 
-      #container #contents {width: 100%; height:200px; }
-      #container #contents div {width: 33.3%; float: left; padding: 10px 0;}
-
+      #contents {width: 100%; height:200px; }
+      #contents > div {width: 32%; float: left; height: 100%;}
+      #contents > div h3 {width: 200px; height: 30px; line-height: 30px; background: #cccccc; text-align: center;}
+      
+      #contents .notice {margin-right: 16px;}
+      #contents .notice ul {height: 170px; overflow: hidden;}
+      #contents .notice li {padding: 0 10px; border: solid 1px #dddddd;}
+      #contents .notice li:nth-child(even) {background: #eeeeee;}
+      #contents .notice li:hover {background: #dddddd;}      
+      #contents .notice li span {float: right;}
+      
+      #contents .gallery {margin-right: 16px;}
+      #contents .gallery ul {height: 170px; overflow: hidden; border: solid 1px #dddddd;}
+      #contents .gallery li {width: 33%; height: 170px; padding: auto; float: left;}
+      
+      
+      #contents .direct {position: relative;}
+      #contents .direct a {position: absolute; top: 50%; left: 25%; text-align: center; width: 50%; background:rgba(0,0,0,0.5);}
+/*      #container #contents div.notice h3 {padding: 5px;}*/
+      
+      
       /* 푸터 */
-      footer {width: 100%; height: 100px;}
-
+      footer {width: 100%; height: 100px; background: #dddddd; }
+      #footerWrap {width: 1200px; height: 100px; margin: 0 auto;}
+      #footerWrap #copyright {float: left; width: 80%; color:#ffffff; line-height: 100px;}
+      #footerWrap #footerGroup {float: right; width: 20%;}
+      #footerWrap #footerGroup #sns {height: 50px; text-align: center;}
+      #footerWrap #footerGroup #sns a {float: left; width: 30%; padding: 1px;}
+      #footerWrap #footerGroup #sns img {height: 50px;}
+      #footerWrap #footerGroup #family {height: 50px;}
+      #footerWrap #footerGroup #family select {width: 90%;}
+				
+      #layerBg {display:none; left:0; top:0;
+        background: rgba(0,0,0,0.7); width: 100%; height: 100%; position: absolute; z-index: 999;}
+      #layerPop {
+        display:none; width: 500px; 
+        margin-left: -250px; margin-top:-250px; height: 500px; 
+        position: absolute; border: 2px solid #000;
+        top:50%; left: 50%; background: #fff; z-index: 1000;
+        padding: 5px;
+      }
+      #layerPop h2 {padding: 20px;}
+      #layerPop p {padding: 20px;}
+      #layerPop #closeBtn {position: absolute; right: 20px; bottom: 20px;}
     </style>
   </head>
 
@@ -67,7 +107,7 @@
         </div>
       </header>
       <div id="main" class="cf">
-        <nav class="submenu" >
+        <nav class="submenu">
           <ul>
             <li><a href="#">동남아/대만</a></li>
             <li><a href="#">중국/홍콩</a></li>
@@ -90,6 +130,7 @@
             <li><a href="#">국외 렌터카</a></li>
           </ul>
         </nav>
+        <div id="submenu_wrap"></div>
       </div>
 
       <!-- 슬라이드 -->
@@ -103,37 +144,90 @@
           </div>
         </div>
 
+         <!-- 컨텐츠 -->
         <div id="contents">
             <div class="notice">
               <h3>공지사항</h3>
+              <ul>
+                <li><a href="#">대한투어 공지사항1	<span>2020.11.24</span></a></li>
+                <li><a href="#">대한투어 공지사항2	<span>2020.11.24</span></a></li>
+                <li><a href="#">대한투어 공지사항3	<span>2020.11.24</span></a></li>
+                <li><a href="#">대한투어 공지사항4	<span>2020.11.24</span></a></li>
+              </ul>
             </div>
             <div class="gallery">
               <h3>갤러리</h3>
+              <div id="iconWrap">
+               <ul>                 
+                <li><a href="#"><img src="./images/Contents/icon1.jpg" alt=""></a></li>
+                <li><a href="#"><img src="./images/Contents/icon2.jpg" alt=""></a></li>
+                <li><a href="#"><img src="./images/Contents/icon3.jpg" alt=""></a></li>
+               </ul>
+                
+              </div>
             </div>
             <div class="direct">
-              <a href="#">바로가기</a>
+             <img src="./images/Contents/direct.jpg" alt="">
+              <a href="#" id="openBtn">바로가기</a>
             </div>
         </div>
-
       </section>
 
-      <!-- 컨텐츠 -->
-      <div>
 
-      </div>
 
       <!-- 푸터 -->
       <footer>
-        COPYRIGHTⓒ by WEBDESIGN. ALL RIGHTS RESERVED
+        <div id="footerWrap">
+          <h3 id="copyright">COPYRIGHTⓒ by WEBDESIGN. ALL RIGHTS RESERVED</h3>
+          <div id="footerGroup">
+              <div id="sns">
+                <a href="#"><img src="./images/Footer/sns1.jpg" alt=""></a>
+                <a href="#"><img src="./images/Footer/sns2.jpg" alt=""></a>
+                <a href="#"><img src="./images/Footer/sns3.jpg" alt=""></a>
+              </div>
+             <div id="family">
+              <select name="" id="">
+                <option value="">패밀리사이트1</option>
+                <option value="">패밀리사이트2</option>
+                <option value="">패밀리사이트3</option>
+              </select>
+         </div>
 
-        패밀리사이트1
-        패밀리사이트2
-        패밀리사이트3
-
+          </div>
+        </div>
       </footer>
+    </div>
+    <div id="layerBg"></div>
+    <div id="layerPop">
+        <h2>대한투어 공지사항</h2>
+        <p>동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세.
+무궁화 삼천리 화려강 대한 사람 대한으로 길이 보전하세.
+남산 위에 저 소나무, 철갑을 두른 듯 바람서리 불변함은 우리 기상일세.</p>
+        <button id="closeBtn"><h3>닫기</h3></button>
     </div>
     <script>
       $(document).ready(function() {
+		  
+		  $("nav").mouseenter(function() {
+			  $("#main .submenu, #submenu_wrap").stop().slideDown(200);
+		  });
+		  $("nav").mouseleave(function() {
+			  $("#main .submenu, #submenu_wrap").stop().slideUp(200);
+		  });
+		  
+        $("#openBtn").click(function() {
+          
+          $("#layerBg").show();
+          $("#layerPop").show();
+        });
+        
+        $("#closeBtn").click(function() {
+          
+          $("#layerBg").hide();
+          $("#layerPop").hide();
+        });
+        
+		  
         var now = 1;
         var max = 3;
         var width = 960;

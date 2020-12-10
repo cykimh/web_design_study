@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>해운대빛축제</title>
+		<link rel="stylesheet" href="css/style.css">
+		<script src="script/script.js"></script>
+		<script src="script/jquery-1.12.3.js"></script>
+	</head>
+	<body>
+	<div id="wrap" class="clearfix">
+		<aside id="side">
+			<div class="logo">
+				<a href="#"><img src="images/Header/logo.png" alt="해운대빛축제"></a>
+			</div>
+			<div class="nav">
+				<ul class="menu" class="clearfix">
+					<li>
+						<a href="#">이용안내</a>
+						<ul class="sub_menu">
+							<li><a href="#">이용방법</a></li>
+							<li><a href="#">이용시간</a></li>
+							<li><a href="#">이용요금</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#">이벤트정보</a>
+						<ul class="sub_menu">
+							<li><a href="#">현장이벤트</a></li>
+							<li><a href="#">온라인이벤트</a></li>
+							<li><a href="#">이벤트예약</a></li>			
+						</ul>
+					</li>
+					<li>
+						<a href="#">프로그램</a>
+						<ul class="sub_menu">
+							<li><a href="#">프로그램안내</a></li>
+							<li><a href="#">온라인예약</a></li>
+							<li><a href="#">단체예약상담</a></li>					
+						</ul>
+					</li>
+					<li>
+						<a href="#">고객센터</a>
+						<ul class="sub_menu">
+							<li><a href="#">공지사항</a></li>
+							<li><a href="#">자주묻는질문</a></li>
+							<li><a href="#">자료실</a></li>					
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</aside>
+		<section id="img-slide">
+			<a href="#" id="slide-img-1"><img src="images/Slide/img1.jpg" alt="해운대빛축제1"></a>
+			<a href="#" id="slide-img-2" class="display_none"><img src="images/Slide/img2.jpg" alt="해운대빛축제2"></a>
+			<a href="#" id="slide-img-3" class="display_none"><img src="images/Slide/img3.jpg" alt="해운대빛축제3" ></a>
+		</section>
+		<section id="banner">
+			<div class="cont1">11</div>
+			<div class="cont2">22</div>
+			<div class="cont3">33</div>
+		</section>
+		
+		<footer id="footer">
+			<div id="foot1"><img src="images/Footer/footerLogo.png" alt="해운대빛축제"></div>
+			<div id="foot2">
+				<a href="#">하단메뉴1</a>
+				<a href="#">하단메뉴2</a>
+				<a href="#">하단메뉴3</a>
+			</div>
+			<div id="foot3">
+				COPYRIGHTⓒ by WEBDESIGN. ALL RIGHTS RESERVED
+			</div>
+		</footer>
+		
+		
+	</div>
+		<!--
+/* 헤더 */
+/* 베너 */
+/* 콘텐츠 */
+/* 푸터 */
+		-->
+	</body>
+	<script>			
+	$(document).ready(function(){
+		
+		// 네비
+		$(".menu li").mouseover(function() {
+			$(this).find(".sub_menu").stop().slideDown();
+		}).mouseout(function() {
+			$(this).find(".sub_menu").stop().slideUp();
+		})
+		
+		// 슬라이드
+		var now = 1;	
+		var last, next;
+		setInterval(function() {
+			last = now;
+			next = (now % 3)+1;
+			$("#slide-img-"+last).fadeOut(500);
+			$("#slide-img-"+next).fadeIn(500);
+			now = next;
+			console.log(last,next);
+		}, 2000)
+	})
+		
+		/*
+		var $images = 2; var $now = 0; var $height = $('.slider ul li').height(); setInterval(function(){ if($now == $images) { $now = 0; $('.slider ul').animate({ top: $now * -$height }); } else { $now += 1; $('.slider ul').animate({ top: $now * -$height }); } }, 2500);
+
+출처: https://tbbrother.tistory.com/110?category=284273 [밑끝없로그]*/
+	</script>
+</html>
+
