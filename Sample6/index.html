@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <link href="./css/style.css" rel="stylesheet">
+    <script src="./script/script.js"></script>
+    <script src="./script/jquery-1.12.3.js"></script>
+    <style>
+      * {margin: 0; padding: 0; list-style: none;}
+      a {text-decoration: none; display: block;}
+
+      .cf::before, .cf::after {clear: both; content: ''; display: block;}
+      body {background: #ffffff; height: 700px;}
+
+      /* 헤더 */
+      header {width: 100%; height: 100px; background:#00C73C;}
+      #header-wrap {width: 1200px; height: 100px; margin: 0 auto;  }
+      #header-wrap .logo {width: 200px; padding: 28px; float:left;}
+      #header-wrap .menu-wrap {width: 800px; height: 100px; float:right; text-align: center;}
+      #header-wrap .menu {float:left; height:100%; line-height: 30px;}
+      #header-wrap li {width: 200px; float: left; margin: auto; transition: all 0.4s;}
+      #header-wrap li a {height:100%;}
+      #header-wrap li a:hover {background-color: indianRed;color:#fff;}
+
+      /* 컨텐츠 */
+      #container {width: 1200px; height: 500px; margin: 0 auto; background: blue;}
+      
+      #container #main-image {height: 350px; overflow: hidden;}
+      #container #slide .image-group {position: relative; width: 2850px; left: -960px;}
+      #container #slide .image-group > div {width: 960px; float: left;}
+
+
+      /* 푸터 */
+      footer {width: 100%; height: 100px;}
+
+
+
+    </style>
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      <!-- 헤더 -->
+      <header>
+        <div id="header-wrap">
+          <a class="logo" href="#" alt="로고">
+            <img src="./images/Header/logo.png" alt="">
+          </a>
+          <nav class="menu-wrap">
+            <ul class="menu">
+              <li><a href="#">해외여행</a></li>
+              <li><a href="#">해외여행</a></li>
+              <li><a href="#">해외여행</a></li>
+              <li><a href="#">해외여행</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <nav class="submenu">
+
+        <ul>
+          <li><a href="#">동남아/대만</a></li>
+          <li><a href="#">중국/홍콩</a></li>
+          <li><a href="#">유럽/두바이</a></li>
+          <li><a href="#">미주/하와이</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">서울/경기권</a></li>
+          <li><a href="#">충청권</a></li>
+          <li><a href="#">전라권</a></li>
+          <li><a href="#">경상/강원권</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">버스여행</a></li>
+          <li><a href="#">자유여행</a></li>
+          <li><a href="#">호텔/펜션</a></li>
+        </ul>
+        <ul>
+          <li><a href="#">국내 렌터카</a></li>
+          <li><a href="#">국외 렌터카</a></li>
+        </ul>
+      </nav>
+
+      <!-- 슬라이드 -->
+
+      <section id="container">
+        <div id="slide">
+          <div class="image-group">
+            <!-- <div class="slide-item1"><img src="./images/common/slide/images(1).jpg" alt=""></div>
+            <div class="slide-item2"><img src="./images/common/slide/images(2).jpg" alt=""></div>
+            <div class="slide-item3"><img src="./images/common/slide/images(3).jpg" alt=""></div> -->
+          </div>
+        </div>
+
+        <div id="contents">
+
+
+        </div>
+
+      </section>
+
+      <!-- 컨텐츠 -->
+      <div>
+
+      </div>
+
+      <!-- 푸터 -->
+      <footer>
+        COPYRIGHTⓒ by WEBDESIGN. ALL RIGHTS RESERVED
+
+        패밀리사이트1
+        패밀리사이트2
+        패밀리사이트3
+
+      </footer>
+    </div>
+    <script>
+      $(document).ready(function() {
+        var now = 1;
+        var max = 3;
+        var width = 960;
+
+        $("#slide .container").prepend($("#slide .container .slide-item3"));
+
+        setInterval(function() {
+            $("#slide .container > div:nth-child(1)").animate({
+              'margin-left' : (width * (-1)) + 'px'
+            }, 600, function() {
+              $("#slide .container").append($("#slide .container > div:nth-child(1)"));
+              $("#slide .container > div:nth-child(3)").css('margin-left', '0px');
+            })
+        }, 2000);
+      });
+
+    </script>
+  </body>
+</html>
